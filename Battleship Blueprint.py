@@ -1,7 +1,10 @@
 from random import randrange
-#Creates a board. Returns a board of the specified length.
+#Creates a board. Returns a board of the specified length. If the value inputed is less than three, it auto-picks three, as the game NEEDS the board to be at least 3X3.
 def MakeBoard(square):
-    board = [["[   ]"]*square]*square
+    if (square > 2):
+        board = [["[   ]"]*square]*square
+    else:
+        board = [["[   ]"]*3]*3
     return board
 #Method which prints the game board with labels. Key word: PRINTS!
 def PrintBoard(board):
@@ -74,13 +77,36 @@ def MakeReferenceBoard(board, coords):
     newBoard[e][f] = "[ X ]"
     return newBoard
 
+def play(board):
+    row_list = []
+    column_list = []
+    print("Welcome to BATTLESHIP! My battleship is placed randomly on the board. You will get 5 chances to sink my ship. Colomns and rows are labled 0-5. Choose wisely and have fun!")
+    print("First Missile Launch")
+    turn = 1
+    while turn <= 5 :
+        try:
+            L1 = int(input("Row: ")) 
+            row_list.append(L1)
+            if L1 not in range(len(board[0])): 
+                print("Your guess is out of range. You lose a turn!")
+            else:
+                L1C = int(input("Column: "))
+                column_list.append(L1C)
+                if L1C not in range(len(board[0])):
+                    print("Your guess is out of range. You lose a turn!")        
+        except ValueError:
+            print("Numbers only please")
+        else:       
+            print("Missile Launch")
+        turn = turn + 1
+    while turn >= 5:
+        print("You have run out of turns.")
+        break
+
 board = MakeBoard(10)
+#PrintBoard(board)
 coords = create(board)
-OtherBoard = MakeReferenceBoard(board, coords)
-#print(coords)
+#OtherBoard = MakeReferenceBoard(board, coords)
+print(coords)
 #print(coords[0][1])
-
-
-
-rowList = []
-colList = []
+#play(board)
