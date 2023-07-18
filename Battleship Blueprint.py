@@ -59,16 +59,13 @@ def MakeReferenceBoard(board, coords):
     d = int(coords[1][1])
     e = int(coords[2][0])
     f = int(coords[2][1])
-    # print(coords[0])
-    # print(coords[1])
-    # print(coords[2])
     
-    newBoard = [["[   ]"]*len(board[0])]*len(board[0])
+    newBoard = board
     newBoard[a][b] = "[ X ]"
     newBoard[c][d] = "[ X ]"
     newBoard[e][f] = "[ X ]"
     return newBoard
-
+#Main game loop.
 def play(board, returnable):
     row_list = []
     column_list = []
@@ -103,10 +100,9 @@ def play(board, returnable):
         print("You have run out of turns.")
         break
 
-board = MakeBoard(10)
-#PrintBoard(board)
+board = MakeBoard(6)
+PrintBoard(board)
 coords = create(board)
 OtherBoard = MakeReferenceBoard(board, coords)
 PrintBoard(OtherBoard)
-#print(coords[0][1])
 #play(board, coords)
