@@ -68,6 +68,17 @@ def MakeReferenceBoard(board, coords):
     newBoard[c][d] = "[ X ]"
     newBoard[e][f] = "[ X ]"
     return newBoard
+#Adds a miss to the board on the specified coords.
+def draw_O(board, row, col):
+    
+    board[row][col] = "[ O ]"   
+       
+    PrintBoard(board)
+#Adds an X to the board on the specified coords.
+def draw_X(board, row, col):
+    
+    board[row][col] = "[ X ]"  
+    PrintBoard(board)
 #Main game loop.
 def play(board, returnable):
     row_list = []
@@ -77,7 +88,6 @@ def play(board, returnable):
     turn = 1
     while turn <= 5 :
         try:
-            #asks for your row and col inputs and stores them
             L1 = int(input("Row: ")) 
             row_list.append(L1)
             if L1 not in range(len(board[0])): 
@@ -87,25 +97,24 @@ def play(board, returnable):
                 column_list.append(L1C)
                 if L1C not in range(len(board[0])):
                     print("Your guess is out of range. You lose a turn!")        
-        except ValueError:
+        except:
             print("Numbers only please")
         else:       
             print("Missile Launch")
-        #Now we 
         if (returnable[0] == row_list[len(row_list)-1], column_list[len(row_list)-1]) or (returnable[1] == row_list[len(row_list)-1], column_list[len(row_list)-1]) or (returnable[2] == row_list[len(row_list)-1], column_list[len(row_list)-1]):
             print("HIT!")
-            PrintBoard(board)
-            print("Just pretend we put an ! where you just hit lmao")
+            draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
+            print("Just pretend we put an X where you just hit lmao")
         else:
             print("MISS!")
-            PrintBoard(board)
+            draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
             print("Just pretend we put an O where you just missed lmao")
         turn = turn + 1
     while turn >= 5:
         print("You have run out of turns.")
         break
 
-board = MakeBoard(1)
+board = MakeBoard(10)
 #PrintBoard(board)
 coords = create(board)
 OtherBoard = MakeReferenceBoard(board, coords)
