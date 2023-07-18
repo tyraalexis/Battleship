@@ -5,6 +5,9 @@ def MakeBoard(board_size):
     if board_size < 3:
         for i in range(3):
             board.append(["[   ]"] * 3)
+    elif(board_size > 10):
+        for i in range(10):
+            board.append(["[   ]"] * 10)  
     else:
         for i in range(board_size):
             board.append(["[   ]"] * board_size)
@@ -114,9 +117,9 @@ def play(board, returnable):
         print("You have run out of turns.")
         break
 
-board = MakeBoard(10)
+board = MakeBoard(25)
 #PrintBoard(board)
 coords = create(board)
-OtherBoard = MakeReferenceBoard(board, coords)
-PrintBoard(OtherBoard)
+#OtherBoard = MakeReferenceBoard(board, coords)
+#PrintBoard(OtherBoard)
 play(board, coords)
