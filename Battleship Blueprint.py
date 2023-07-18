@@ -77,6 +77,7 @@ def play(board, returnable):
     turn = 1
     while turn <= 5 :
         try:
+            #asks for your row and col inputs and stores them
             L1 = int(input("Row: ")) 
             row_list.append(L1)
             if L1 not in range(len(board[0])): 
@@ -90,6 +91,7 @@ def play(board, returnable):
             print("Numbers only please")
         else:       
             print("Missile Launch")
+        #Now we 
         if (returnable[0] == row_list[len(row_list)-1], column_list[len(row_list)-1]) or (returnable[1] == row_list[len(row_list)-1], column_list[len(row_list)-1]) or (returnable[2] == row_list[len(row_list)-1], column_list[len(row_list)-1]):
             print("HIT!")
             PrintBoard(board)
@@ -104,8 +106,8 @@ def play(board, returnable):
         break
 
 board = MakeBoard(1)
-PrintBoard(board)
+#PrintBoard(board)
 coords = create(board)
 OtherBoard = MakeReferenceBoard(board, coords)
 PrintBoard(OtherBoard)
-#play(board, coords)
+play(board, coords)
