@@ -1,10 +1,13 @@
 from random import randrange
 #Creates a board. Returns a board of the specified length. If the value inputed is less than three, it auto-picks three, as the game NEEDS the board to be at least 3X3.
-def MakeBoard(square):
-    if (square > 2):
-        board = [["[   ]"]*square]*square
+def MakeBoard(board_size):
+    board = []
+    if board_size < 3:
+        for i in range(3):
+            board.append(["[   ]"] * 3)
     else:
-        board = [["[   ]"]*3]*3
+        for i in range(board_size):
+            board.append(["[   ]"] * board_size)
     return board
 #Method which prints the game board with labels. Key word: PRINTS!
 def PrintBoard(board):
@@ -100,7 +103,7 @@ def play(board, returnable):
         print("You have run out of turns.")
         break
 
-board = MakeBoard(6)
+board = MakeBoard(1)
 PrintBoard(board)
 coords = create(board)
 OtherBoard = MakeReferenceBoard(board, coords)
