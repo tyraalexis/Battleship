@@ -130,6 +130,13 @@ def play():
                         draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
                         x = 0
                         turn = turn + 1
+                if(cpu_turn(your_board) == True):
+                    PrintBoard(your_board)
+                    loser = input("The opponent hit all of your ships!")
+                    x = 1
+                else:
+                    PrintBoard(your_board)
+                    print("The opponent missed!")
                 while x == 1:
                     again = input("Would you like to play again? y/n? ")
                     if again == "y":
