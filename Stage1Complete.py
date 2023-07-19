@@ -139,6 +139,7 @@ def play():
                     x = 1
                 else:
                     print("The opponent missed!")
+                    continue
                 while x == 1:
                     again = input("Would you like to play again? y/n? ")
                     if again == "y":
