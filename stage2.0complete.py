@@ -83,7 +83,16 @@ def play():
             your_board = MakeBoard(size)
             PrintBoard(board)
             where_r = int(input("In what ROW would you like to place your ship? "))
-            where_c = int(input("In what COLUMN would you like to place your ship? "))
+            if where_r not in range(len(board[0])):
+                print("Your point is out of range.")
+                continue
+            else:
+                where_c = int(input("In what COLUMN would you like to place your ship? "))
+                if where_c not in range(len(board[0])):
+                    print("Your point is out of range.")
+                    continue
+                else:
+                    pass
             ship1 = (where_r, where_c)
             print("The coordinates of the ship are",ship1,".")
             draw_I(your_board, where_r, where_c)
