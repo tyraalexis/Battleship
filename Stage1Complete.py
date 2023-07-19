@@ -102,66 +102,56 @@ def play():
             board = MakeBoard(size)
             PrintBoard(board)
             print("First Missile Launch")
-            turn = 1
-            while turn <= 5 :
-                x = 0
-                try:
-                    L1 = int(input("Row: ")) 
-                    row_list.append(L1)
-                    if L1 not in range(len(board[0])): 
+            x = 0
+            try:
+                L1 = int(input("Row: ")) 
+                row_list.append(L1)
+                if L1 not in range(len(board[0])): 
+                    print("Your guess is out of range.")
+                    continue
+                else:
+                    L1C = int(input("Column: "))
+                    column_list.append(L1C)
+                    if L1C not in range(len(board[0])):
                         print("Your guess is out of range.")
                         continue
-                    else:
-                        L1C = int(input("Column: "))
-                        column_list.append(L1C)
-                        if L1C not in range(len(board[0])):
-                            print("Your guess is out of range.")
-                            continue
-                        else: pass
-                except ValueError:
-                    print("Numbers only please")
-                else:       
-                    car = row_list[len(row_list)-1], column_list[len(row_list)-1]
-                    print("Missile Launch")
-                    if (ship == car):
-                        draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
-                        print("HIT!")
-                        x = 1
-                    else:
-                        print("MISS!")
-                        draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
-                        x = 0
-                        turn = turn + 1
-                while x == 1:
-                    again = input("Would you like to play again? y/n? ")
-                    if again == "y":
-                        play()
-                    if again == "n": 
-                        print("Thanks for playing!")
-                    else:
-                        again = input("y or n ... are you stupid? Try again. ")
-                if(cpu_turn(your_board) == True):
-                    loser = input("The opponent hit all of your ships!")
+                    else: pass
+            except ValueError:
+                print("Numbers only please")
+            else:       
+                car = row_list[len(row_list)-1], column_list[len(row_list)-1]
+                print("Missile Launch")
+                if (ship == car):
+                    draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
+                    print("HIT!")
                     x = 1
                 else:
-                    print("The opponent missed!")
+                    print("MISS!")
+                    draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
+                    x = 0
+            if(x == 1):
                 while x == 1:
                     again = input("Would you like to play again? y/n? ")
                     if again == "y":
                         play()
                     if again == "n": 
                         print("Thanks for playing!")
-                    else:
-                        again = input("y or n ... are you stupid? Try again. ")
-            while turn >= 5:
-                loser = input("You have run out of turns. Would you like to play again? y/n? ")
-                if loser == "y":
+                else:
+                    again = input("y or n ... are you stupid? Try again. ")
+            if(cpu_turn(your_board) == True):
+                loser = input("The opponent hit all of your ships!")
+                x = 1
+            else:
+                print("The opponent missed!")
+            while x == 1:
+                again = input("Would you like to play again? y/n? ")
+                if again == "y":
                     play()
-                    if loser == "n": 
-                        print("Thanks for playing!")
-                    else:
-                        loser = input("y or n ... are you stupid? Try again. ")
-                break
+                if again == "n": 
+                    print("Thanks for playing!")
+                else:
+                    again = input("y or n ... are you stupid? Try again. ")
+            break
 
 #board = MakeBoard(size)
 #PrintBoard(board)
