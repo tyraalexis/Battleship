@@ -12,4 +12,7 @@ You should firstly be welcomed and introduced to our "Project Battleship" game. 
 
 Behind the scenes your CPU opponent has placed their ship and is gearing up to target and attack your ship. As you are blind to where the CPU has placed their ship, it is blind to yours as well. 
 
-On your first turn you will be asked on which row you would like to aim your missle. 
+On your first turn you will be asked on which row you would like to aim your missle. Insert a single integer just like you did before. Repeaat for the column.
+
+Your guess will be placed on the board and the computer's guess will be placed on the seperate board.
+THe cycle will continue until one of the ships are hit.
