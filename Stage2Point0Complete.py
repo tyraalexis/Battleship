@@ -14,12 +14,12 @@ def MakeBoard(board_size):
     return board
 #Method which prints the game board with labels. Key word: PRINTS!
 def PrintBoard(board):
-    y = "+  0"
+    y = "+  1"
     for i in range(len(board[0])-1):
-        y = y + "    " + str(i + 1)
+        y = y + "    " + str(i + 2)
     print(y)
     for row in range(len(board[0])):
-        y = str(row)
+        y = str(row + 1)
         for col in range(len(board[0])):
             y = y + board[row][col]
         print(y)
@@ -82,8 +82,17 @@ def play():
             board = MakeBoard(size)
             your_board = MakeBoard(size)
             PrintBoard(board)
-            where_r = int(input("In what ROW would you like to place your ship? "))
-            where_c = int(input("In what COLUMN would you like to place your ship? "))
+            where_r = int(input("In what ROW would you like to place your ship? "))-1
+            if where_r not in range(len(board[0])):
+                print("Your point is out of range.")
+                continue
+            else:
+                where_c = int(input("In what COLUMN would you like to place your ship? "))-1
+                if where_c not in range(len(board[0])):
+                    print("Your point is out of range.")
+                    continue
+                else:
+                    pass
             ship1 = (where_r, where_c)
             print("The coordinates of the ship are",ship1,".")
             draw_I(your_board, where_r, where_c)
@@ -100,30 +109,34 @@ def play():
             x = 0
             while True:
                 try:
-                    L1 = int(input("Row: ")) 
+                    L1 = int(input("Row: "))-1
                     row_list.append(L1)
                     if L1 not in range(len(board[0])): 
                         print("Your guess is out of range.")
                         continue
                     else:
-                        L1C = int(input("Column: "))
+                        L1C = int(input("Column: "))-1
                         column_list.append(L1C)
                         if L1C not in range(len(board[0])):
                             print("Your guess is out of range.")
                             continue
-                        else: pass
-                except ValueError:
+                        else:
+                            pass
+                except:
                     print("Numbers only please")
+                    continue
                 else:       
-                    car = row_list[len(row_list)-1], column_list[len(row_list)-1]
+                    car = row_list[len(row_list)-1], column_list[len(column_list)-1]
                     print("Missile Launch")
                     if (ship == car):
+                        print("CPU Board")
                         draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
                         print("HIT!")
                         x = 1
                     else:
-                        print("MISS!")
+                        print("CPU Board")
                         draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
+                        print("MISS!")
                         x = 0
                 if(x == 1):
                     while x == 1:
@@ -134,6 +147,7 @@ def play():
                             print("Thanks for playing!")
                     else:
                         again = input("y or n ... are you stupid? Try again. ")
+                print("Your Board")
                 if(cpu_turn(your_board) == True):
                     loser = input("The opponent hit all of your ships!")
                     x = 1
