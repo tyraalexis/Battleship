@@ -59,11 +59,23 @@ def draw_X(board, row, col):
 def draw_I(board, row, col):
     board[row][col] = "[ I ]"  
     PrintBoard(board)
+#Used in main method for cpu's turn. Returns True if it hits anything. False if it misses.
+def cpu_turn(board):
+    coords = create(board)
+    if(board[coords[0][0]][coords[0][1]] == "[   ]"):
+        draw_O(board, coords[0][0], coords[0][1])
+        return False
+    elif(board[coords[0][0]][coords[0][1]] == "[ I ]"):
+        draw_X(board, coords[0][0], coords[0][1])
+        return True
+    else:
+        cpu_turn(board)
+
 #Main game loop.
 def play():
     while True:
-        row_list = []
-        column_list = []
+        row_list = [] #List of the user's guessed row values
+        column_list = [] #List of the user's guessed column values
         print("Welcome to BATTLESHIP! My battleship is placed randomly on the board. Choose wisely and have fun!")
         try:
             size = int(input("How big would you like your grid to be? "))
