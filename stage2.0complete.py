@@ -94,7 +94,7 @@ def play():
                 else:
                     pass
             ship1 = (where_r, where_c)
-            print("The coordinates of the ship are",ship1,".")
+            print("The coordinates of the ship are",ship1[0] + 1, ",", ship1[1] + 1, ".")
             draw_I(your_board, where_r, where_c)
             print("Here is your board!")
            
