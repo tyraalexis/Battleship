@@ -55,6 +55,10 @@ def draw_X(board, row, col):
     
     board[row][col] = "[ X ]"  
     PrintBoard(board)
+#Adds an I to the board on the specified coords.
+def draw_I(board, row, col):
+    board[row][col] = "[ I ]"  
+    PrintBoard(board)
 #Main game loop.
 def play():
     while True:
@@ -64,6 +68,7 @@ def play():
         try:
             size = int(input("How big would you like your grid to be? "))
             board = MakeBoard(size)
+            your_board = MakeBoard(size)
             where = input("Would you like to place your ship(1) or allow it to be randomized(2)? 1 or 2? ")
             if where == "1":
                 PrintBoard(board)
@@ -71,6 +76,8 @@ def play():
                 where_c = int(input("In what COLUMN would you like to place your ship? "))
                 ship = (where_r, where_c)
                 print("The coordinates of the ship are",ship,".")
+                draw_I(your_board, where_r, where_c)
+                print("Here is your board!")
             elif where == "2":
                 ship = create(board)
             else:
