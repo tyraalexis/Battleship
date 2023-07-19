@@ -120,12 +120,14 @@ def play():
                     car = row_list[len(row_list)-1], column_list[len(column_list)-1]
                     print("Missile Launch")
                     if (ship == car):
+                        print("CPU Board")
                         draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
                         print("HIT!")
                         x = 1
                     else:
-                        print("MISS!")
+                        print("CPU Board")
                         draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
+                        print("MISS!")
                         x = 0
                 if(x == 1):
                     while x == 1:
@@ -136,6 +138,7 @@ def play():
                             print("Thanks for playing!")
                     else:
                         again = input("y or n ... are you stupid? Try again. ")
+                print("Your Board")
                 if(cpu_turn(your_board) == True):
                     loser = input("The opponent hit all of your ships!")
                     x = 1
