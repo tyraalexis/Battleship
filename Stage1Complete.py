@@ -62,11 +62,11 @@ def draw_I(board, row, col):
 #Used in main method for cpu's turn. Returns True if it hits anything. False if it misses.
 def cpu_turn(board):
     coords = create(board)
-    if(board[coords[0][0]][coords[0][1]] == "[   ]"):
-        draw_O(board, coords[0][0], coords[0][1])
+    if(board[coords[0]][coords[1]] == "[   ]"):
+        draw_O(board, coords[0], coords[1])
         return False
-    elif(board[coords[0][0]][coords[0][1]] == "[ I ]"):
-        draw_X(board, coords[0][0], coords[0][1])
+    elif(board[coords[0]][coords[1]] == "[ I ]"):
+        draw_X(board, coords[0], coords[1])
         return True
     else:
         cpu_turn(board)
@@ -92,6 +92,8 @@ def play():
                 print("Here is your board!")
             elif where == "2":
                 ship = create(board)
+                draw_I(your_board, ship[0], ship[1])
+                print("Here is your board!")
             else:
                 print("Wrong answer. I guess I'll place it myself.")
         except ValueError:
@@ -107,13 +109,13 @@ def play():
                     L1 = int(input("Row: ")) 
                     row_list.append(L1)
                     if L1 not in range(len(board[0])): 
-                        print("Your guess is out of range. You lose a turn!")
+                        print("Your guess is out of range.")
                         continue
                     else:
                         L1C = int(input("Column: "))
                         column_list.append(L1C)
                         if L1C not in range(len(board[0])):
-                            print("Your guess is out of range. You lose a turn!")
+                            print("Your guess is out of range.")
                             continue
                         else: pass
                 except ValueError:
@@ -130,12 +132,18 @@ def play():
                         draw_O(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
                         x = 0
                         turn = turn + 1
+                while x == 1:
+                    again = input("Would you like to play again? y/n? ")
+                    if again == "y":
+                        play()
+                    if again == "n": 
+                        print("Thanks for playing!")
+                    else:
+                        again = input("y or n ... are you stupid? Try again. ")
                 if(cpu_turn(your_board) == True):
-                    PrintBoard(your_board)
                     loser = input("The opponent hit all of your ships!")
                     x = 1
                 else:
-                    PrintBoard(your_board)
                     print("The opponent missed!")
                 while x == 1:
                     again = input("Would you like to play again? y/n? ")
