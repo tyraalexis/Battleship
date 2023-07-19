@@ -14,12 +14,12 @@ def MakeBoard(board_size):
     return board
 #Method which prints the game board with labels. Key word: PRINTS!
 def PrintBoard(board):
-    y = "+  0"
+    y = "+  1"
     for i in range(len(board[0])-1):
-        y = y + "    " + str(i + 1)
+        y = y + "    " + str(i + 2)
     print(y)
     for row in range(len(board[0])):
-        y = str(row)
+        y = str(row + 1)
         for col in range(len(board[0])):
             y = y + board[row][col]
         print(y)
@@ -82,12 +82,12 @@ def play():
             board = MakeBoard(size)
             your_board = MakeBoard(size)
             PrintBoard(board)
-            where_r = int(input("In what ROW would you like to place your ship? "))
+            where_r = int(input("In what ROW would you like to place your ship? "))-1
             if where_r not in range(len(board[0])):
                 print("Your point is out of range.")
                 continue
             else:
-                where_c = int(input("In what COLUMN would you like to place your ship? "))
+                where_c = int(input("In what COLUMN would you like to place your ship? "))-1
                 if where_c not in range(len(board[0])):
                     print("Your point is out of range.")
                     continue
@@ -109,13 +109,13 @@ def play():
             x = 0
             while True:
                 try:
-                    L1 = int(input("Row: ")) 
+                    L1 = int(input("Row: "))-1
                     row_list.append(L1)
                     if L1 not in range(len(board[0])): 
                         print("Your guess is out of range.")
                         continue
                     else:
-                        L1C = int(input("Column: "))
+                        L1C = int(input("Column: "))-1
                         column_list.append(L1C)
                         if L1C not in range(len(board[0])):
                             print("Your guess is out of range.")
