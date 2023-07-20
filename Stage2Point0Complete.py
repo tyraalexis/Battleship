@@ -14,12 +14,15 @@ def MakeBoard(board_size):
     return board
 #Method which prints the game board with labels. Key word: PRINTS!
 def PrintBoard(board):
-    y = "+  1"
+    y = "+   1"
     for i in range(len(board[0])-1):
         y = y + "    " + str(i + 2)
     print(y)
     for row in range(len(board[0])):
-        y = str(row + 1)
+        if (row >= 9):
+            y = str(row + 1)
+        else:
+            y = str(row + 1) + " "
         for col in range(len(board[0])):
             y = y + board[row][col]
         print(y)
@@ -28,9 +31,12 @@ def create(board):
      returnable = []
      choose_col = randrange(0, len(board[0]))
      choose_row = randrange(0, len(board[0]))
-    
+     if(board[choose_col][choose_row] != "[   ]"):
+        create(board)
      h_v = randrange(0,2)
      if h_v == 0:
+        if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
+            create(board)
         if choose_col == len(board[0])-1:
              returnable.append([choose_col - 1, choose_row])
              returnable.append([choose_col, choose_row])
@@ -41,6 +47,8 @@ def create(board):
              returnable.append([choose_col + 1, choose_row])
              returnable.append([choose_col, choose_row])
      elif h_v == 1:
+         if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
+             create(board)
          if choose_row == len(board[0])-1:
              returnable.append([choose_col, choose_row - 1])
              returnable.append([choose_col, choose_row])
