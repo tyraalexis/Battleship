@@ -28,7 +28,28 @@ def create(board):
      returnable = []
      choose_col = randrange(0, len(board[0]))
      choose_row = randrange(0, len(board[0]))
-     returnable = choose_row, choose_col
+    
+     h_v = randrange(0,2)
+     if h_v == 0:
+        if choose_col == len(board[0])-1:
+             returnable.append([choose_col - 1, choose_row])
+             returnable.append([choose_col, choose_row])
+        elif choose_col == 0:
+             returnable.append([choose_col, choose_row])
+             returnable.append([choose_col + 1, choose_row])
+        else:
+             returnable.append([choose_col + 1, choose_row])
+             returnable.append([choose_col, choose_row])
+     elif h_v == 1:
+         if choose_row == len(board[0])-1:
+             returnable.append([choose_col, choose_row - 1])
+             returnable.append([choose_col, choose_row])
+         elif choose_row == 0:
+             returnable.append([choose_col, choose_row])
+             returnable.append([choose_col, choose_row + 1])
+         else:
+             returnable.append([choose_col, choose_row + 1])
+             returnable.append([choose_col, choose_row])
      return returnable
 #Creates a Reference-Board that has the ships
 def MakeReferenceBoard(board, coords):
@@ -70,7 +91,6 @@ def cpu_turn(board):
         return True
     else:
         cpu_turn(board)
-
 #Main game loop.
 def play():
     while True:
@@ -122,7 +142,7 @@ def play():
                             continue
                         else:
                             pass
-                except:
+                except:  
                     print("Numbers only please")
                     continue
                 else:       
