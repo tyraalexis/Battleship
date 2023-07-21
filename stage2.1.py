@@ -179,34 +179,24 @@ def twosship():
                     h_v = randrange(0,2)
                     if h_v == 0:
                         if choose_col == len(board[0])-1:
-                            if(board [choose_col-1, choose_row] != "[   ]"):
-                                create1(board)
                             returnable.append([choose_col - 1, choose_row])
                             returnable.append([choose_col, choose_row])
                         elif choose_col == 0:
-                            if(board [choose_col+1, choose_row] != "[   ]"):
-                                create1(board)
                             returnable.append([choose_col, choose_row])
                             returnable.append([choose_col + 1, choose_row])
                         else:
-                            if(board [choose_col+1, choose_row] != "[   ]"):
-                                create1(board)
                             returnable.append([choose_col + 1, choose_row])
                             returnable.append([choose_col, choose_row])
                     elif h_v == 1:
+                        if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
+                            create(board)
                         if choose_row == len(board[0])-1:
-                            if(board [choose_col, choose_row-1] != "[   ]"):
-                                create1(board)
                             returnable.append([choose_col, choose_row - 1])
                             returnable.append([choose_col, choose_row])
                         elif choose_row == 0:
-                            if(board [choose_col, choose_row+1] != "[   ]"):
-                                create1(board)
                             returnable.append([choose_col, choose_row])
                             returnable.append([choose_col, choose_row + 1])
                         else:
-                            if(board [choose_col, choose_row+1] != "[   ]"):
-                                create1(board)
                             returnable.append([choose_col, choose_row + 1])
                             returnable.append([choose_col, choose_row])
                     return returnable
@@ -218,35 +208,27 @@ def twosship():
                         create(board)
                     h_v = randrange(0,2)
                     if h_v == 0:
+                        if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
+                            create(board)
                         if choose_col == len(board[0])-1:
-                            if(board [choose_col-1, choose_row] != "[   ]"):
-                                create2(board)
                             returnable.append([choose_col - 1, choose_row])
                             returnable.append([choose_col, choose_row])
                         elif choose_col == 0:
-                            if(board [choose_col+1, choose_row] != "[   ]"):
-                                create2(board)
                             returnable.append([choose_col, choose_row])
                             returnable.append([choose_col + 1, choose_row])
                         else:
-                            if(board [choose_col+1, choose_row] != "[   ]"):
-                                create2(board)
                             returnable.append([choose_col + 1, choose_row])
                             returnable.append([choose_col, choose_row])
                     elif h_v == 1:
+                        if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
+                            create(board)
                         if choose_row == len(board[0])-1:
-                            if(board [choose_col, choose_row-1] != "[   ]"):
-                                create2(board)
                             returnable.append([choose_col, choose_row - 1])
                             returnable.append([choose_col, choose_row])
                         elif choose_row == 0:
-                            if(board [choose_col, choose_row+1] != "[   ]"):
-                                create2(board)
                             returnable.append([choose_col, choose_row])
                             returnable.append([choose_col, choose_row + 1])
                         else:
-                            if(board [choose_col, choose_row+1] != "[   ]"):
-                                create2(board)
                             returnable.append([choose_col, choose_row + 1])
                             returnable.append([choose_col, choose_row])
                     return returnable
