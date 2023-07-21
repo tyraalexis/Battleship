@@ -93,7 +93,12 @@ def draw_X(board, row, col, row2, col2):
 def draw_I(board, row, col, row2, col2):
     board[row][col] = "[ I ]"  
     board[row2][col2] = "[ I ]" 
-    PrintBoard(board)
+  #Adds an I to the board on the specified coords.
+def draw_Y(board, ship1, ship2):
+    board[ship1[0][0]][ship1[0][1]] = "[ I ]"  
+    board[ship2[0][0]][ship2[0][1]] = "[ I ]" 
+    PrintBoard(board)  
+
 #Used in main method for cpu's turn. Returns True if it hits anything. False if it misses.
 def cpu_turn(board):
     coords = create(board)
@@ -105,39 +110,6 @@ def cpu_turn(board):
         return True
     else:
         cpu_turn(board)
-#MEthod to create user ship      
-def create2(board):
-    returnable = []
-    choose_row = row
-    choose_col = col
-    if(board[choose_row][choose_col] != "[   ]"):
-        create(board)
-    h_v = randrange(0,2)
-    if h_v == 0:
-        if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
-            create(board)
-            if choose_col == len(board[0])-1:
-                    returnable.append([choose_col - 1, choose_row])
-                    returnable.append([choose_col, choose_row])
-            elif choose_col == 0:
-                    returnable.append([choose_col, choose_row])
-                    returnable.append([choose_col + 1, choose_row])
-            else:
-                    returnable.append([choose_col + 1, choose_row])
-                    returnable.append([choose_col, choose_row])
-        elif h_v == 1:
-            if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
-                create(board)
-            if choose_row == len(board[0])-1:
-                returnable.append([choose_col, choose_row - 1])
-                returnable.append([choose_col, choose_row])
-            elif choose_row == 0:
-                returnable.append([choose_col, choose_row])
-                returnable.append([choose_col, choose_row + 1])
-            else:
-                returnable.append([choose_col, choose_row + 1])
-                returnable.append([choose_col, choose_row])
-    return returnable       
 
 #Used in main method to recieve user input and to place their ships
 def twosship():
@@ -175,9 +147,11 @@ def twosship():
                     choose_row = row 
                     choose_col = col 
                     if(board[choose_row][choose_col] != "[   ]"):
-                        create(board)
+                        create1(board)
                     h_v = randrange(0,2)
                     if h_v == 0:
+                        if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
+                            create2(board)
                         if choose_col == len(board[0])-1:
                             returnable.append([choose_col - 1, choose_row])
                             returnable.append([choose_col, choose_row])
@@ -189,7 +163,7 @@ def twosship():
                             returnable.append([choose_col, choose_row])
                     elif h_v == 1:
                         if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
-                            create(board)
+                            create1(board)
                         if choose_row == len(board[0])-1:
                             returnable.append([choose_col, choose_row - 1])
                             returnable.append([choose_col, choose_row])
@@ -205,11 +179,11 @@ def twosship():
                     choose_row = row2
                     choose_col = col2
                     if(board[choose_row][choose_col] != "[   ]"):
-                        create(board)
+                        create2(board)
                     h_v = randrange(0,2)
                     if h_v == 0:
                         if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
-                            create(board)
+                            create2(board)
                         if choose_col == len(board[0])-1:
                             returnable.append([choose_col - 1, choose_row])
                             returnable.append([choose_col, choose_row])
@@ -221,7 +195,7 @@ def twosship():
                             returnable.append([choose_col, choose_row])
                     elif h_v == 1:
                         if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
-                            create(board)
+                            create2(board)
                         if choose_row == len(board[0])-1:
                             returnable.append([choose_col, choose_row - 1])
                             returnable.append([choose_col, choose_row])
@@ -235,10 +209,10 @@ def twosship():
                 
                 #Printing the two coordinates on the user's board
                 ship1 = create1(board)
-                print(ship1)
                 ship2 = create2(board)
                 print ("The coordinates of the ships are",ship1, ship2,".")
                 draw_I(your_board, row, col, row2, col2)
+                draw_Y(your_board, ship1, ship2)
                 print("Here is your board!")
             except ValueError:
                 print("Numbers only.")
