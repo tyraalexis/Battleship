@@ -144,8 +144,8 @@ def twosship():
                     continue
                 def create1(board): #creating two indices ship 1
                     returnable = []
-                    choose_row = row 
-                    choose_col = col 
+                    choose_row = row + 1
+                    choose_col = col + 1
                     if(board[choose_row][choose_col] != "[   ]"):
                         create1(board)
                     h_v = randrange(0,2)
@@ -176,8 +176,8 @@ def twosship():
                     return returnable
                 def create2(board): #creating teo indices ship 2
                     returnable = []
-                    choose_row = row2
-                    choose_col = col2
+                    choose_row = row2 + 1
+                    choose_col = col2 + 1
                     if(board[choose_row][choose_col] != "[   ]"):
                         create2(board)
                     h_v = randrange(0,2)
@@ -205,6 +205,7 @@ def twosship():
                         else:
                             returnable.append([choose_col, choose_row + 1])
                             returnable.append([choose_col, choose_row])
+                    
                     return returnable
                 
                 #Printing the two coordinates on the user's board
