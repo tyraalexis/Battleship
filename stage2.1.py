@@ -76,26 +76,24 @@ def MakeReferenceBoard(board, coords):
     newBoard[e][f] = "[ X ]"
     return newBoard
 #Adds a miss to the board on the specified coords.
-def draw_O(board, row, col, row2, col2):
+def draw_O(board, row, col):
     
     board[row][col] = "[ O ]" 
-    board[row2][col2] = "[ O ]"  
        
     PrintBoard(board)
 #Adds an X to the board on the specified coords.
-def draw_X(board, row, col, row2, col2):
+def draw_X(board, row, col):
     
     board[row][col] = "[ X ]"  
-    board[row2][col2] = "[ X ]"
     
     PrintBoard(board)
 #Adds an I to the board on the specified coords.
 def draw_I(board, row, col, row2, col2):
     board[row][col] = "[ I ]"  
-    board[row2][col2] = "[ I ]" 
+    board[row2 ][col2 ] = "[ I ]" 
   #Adds an I to the board on the specified coords.
 def draw_Y(board, ship1, ship2):
-    board[ship1[0][0]][ship1[0][1]] = "[ I ]"  
+    board[ship1[0][0] - 1][ship1[0][1] -1] = "[ I ]"  
     board[ship2[0][0]][ship2[0][1]] = "[ I ]" 
     PrintBoard(board)  
 
@@ -142,10 +140,10 @@ def twosship():
                 if col2 not in range(len(board[0])):
                     print("Your point is our of range")
                     continue
-                def create1(board): #creating teo indices ship 2
+                def create1(board): #creating two indices ship 2
                     returnable = []
-                    choose_row = row + 1
-                    choose_col = col + 1
+                    choose_row = row 
+                    choose_col = col 
                     if(board[choose_row][choose_col] != "[   ]"):
                         create1(board)
                     h_v = randrange(0,2)
@@ -177,8 +175,8 @@ def twosship():
                     return returnable
                 def create2(board): #creating teo indices ship 2
                     returnable = []
-                    choose_row = row2 + 1
-                    choose_col = col2 + 1
+                    choose_row = row2
+                    choose_col = col2
                     if(board[choose_row][choose_col] != "[   ]"):
                         create2(board)
                     h_v = randrange(0,2)
@@ -243,13 +241,13 @@ def play():
         while True:
             try:
                 L1 = int(input("Row: ")) 
-                row_list.append(L1)
+                row_list.append(L1 - 1)
                 if L1 not in range(len(board[0])): 
                     print("Your guess is out of range.")
                     continue
                 else:
                     L1C = int(input("Column: "))
-                    column_list.append(L1C)
+                    column_list.append(L1C - 1)
                     if L1C not in range(len(board[0])):
                         print("Your guess is out of range.")
                         continue
