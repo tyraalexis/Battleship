@@ -31,34 +31,28 @@ def create(board):
      returnable = []
      choose_col = randrange(0, len(board[0]))
      choose_row = randrange(0, len(board[0]))
-     if(board[choose_col][choose_row] != "[   ]"):
-        create(board)
-     h_v = randrange(0,2)
-     if h_v == 0:
-        if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
-            create(board)
+     returnable = choose_row, choose_col
+     return returnable
+#Makes ships 2x2
+def expand(board, choose_row, choose_col):
+    returnable = []
+    returnable.append([choose_row, choose_col])
+    h_v = randrange(0,2)
+    if h_v == 0:
         if choose_col == len(board[0])-1:
              returnable.append([choose_col - 1, choose_row])
-             returnable.append([choose_col, choose_row])
         elif choose_col == 0:
-             returnable.append([choose_col, choose_row])
              returnable.append([choose_col + 1, choose_row])
         else:
-             returnable.append([choose_col + 1, choose_row])
-             returnable.append([choose_col, choose_row])
-     elif h_v == 1:
-         if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
-             create(board)
+             returnable.append([choose_col - 1, choose_row])
+    elif h_v == 1:
          if choose_row == len(board[0])-1:
              returnable.append([choose_col, choose_row - 1])
-             returnable.append([choose_col, choose_row])
          elif choose_row == 0:
-             returnable.append([choose_col, choose_row])
              returnable.append([choose_col, choose_row + 1])
          else:
-             returnable.append([choose_col, choose_row + 1])
-             returnable.append([choose_col, choose_row])
-     return returnable
+             returnable.append([choose_col, choose_row - 1])
+    return returnable
 #Creates a Reference-Board that has the ships
 def MakeReferenceBoard(board, coords):
     a = int(coords[0][0])
@@ -106,7 +100,7 @@ def play():
         column_list = [] #List of the user's guessed column values
         print("Welcome to BATTLESHIP! My battleship is placed randomly on the board. Choose wisely and have fun!")
         try:
-            size = int(input("How big would you like your grid to be? "))
+            size = 10
             board = MakeBoard(size)
             your_board = MakeBoard(size)
             PrintBoard(board)
@@ -125,9 +119,7 @@ def play():
             print("The coordinates of the ship are",ship1[0] + 1, ",", ship1[1] + 1, ".")
             draw_I(your_board, where_r, where_c)
             print("Here is your board!")
-           
             ship = create(board)
-            
         except ValueError:
             print("Numbers only.")
         else: 
@@ -150,7 +142,7 @@ def play():
                             continue
                         else:
                             pass
-                except:  
+                except:
                     print("Numbers only please")
                     continue
                 else:       
@@ -188,13 +180,15 @@ def play():
                         play()
                     if again == "n": 
                         print("Thanks for playing!")
+                        break
                     else:
                         again = input("y or n ... are you stupid? Try again. ")
                 break
 
-#board = MakeBoard(size)
+board = MakeBoard(10)
 #PrintBoard(board)
 #coords = create(board)
 #OtherBoard = MakeReferenceBoard(board, coords)
 #PrintBoard(OtherBoard)
+print(expand(board, 0,0))
 play()
