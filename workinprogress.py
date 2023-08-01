@@ -1,4 +1,26 @@
 from random import randrange
+#BATTLESHIIIIIPP!!!!
+class battleship:
+    def __innit__(self, name, row, col, row2, col2, length):
+        self.name = name
+        self.row = row
+        self.col = col
+        self.coord1 = row, col
+        self.row2 = row2
+        self.col2 = col2
+        self.coord2 = row2, col2
+        self.hits = 0
+        self.length = length
+    def hit(battleship):
+        battleship.hits += 1
+        if (battleship.hits < battleship.length):
+            return False
+        return True
+#Makes a random row and col value
+def generate(board):
+    row = randrange(0,len(board[0]))
+    col = randrange(0,len(board[0]))
+    return [row, col]
 #Creates a board. Returns a board of the specified length. If the value inputed is less than three, it auto-picks three, as the game NEEDS the board to be at least 3X3.
 def MakeBoard(board_size):
     board = []
@@ -31,33 +53,33 @@ def create(board):
      returnable = []
      choose_col = randrange(0, len(board[0]))
      choose_row = randrange(0, len(board[0]))
-     if(board[choose_col][choose_row] != "[   ]"):
+     if(board[choose_row][choose_col] != "[   ]"):
         create(board)
      h_v = randrange(0,2)
      if h_v == 0:
-        if(board[choose_col - 1][choose_row] != "[   ]" or board[choose_col + 1][choose_row] != "[   ]"):
+        if(board[choose_row][choose_col - 1] != "[   ]" or board[choose_row][choose_col + 1] != "[   ]"):
             create(board)
         if choose_col == len(board[0])-1:
-             returnable.append([choose_col - 1, choose_row])
-             returnable.append([choose_col, choose_row])
+             returnable.append([choose_row,choose_col - 1 ])
+             returnable.append(choose_row,[choose_col ])
         elif choose_col == 0:
-             returnable.append([choose_col, choose_row])
-             returnable.append([choose_col + 1, choose_row])
+             returnable.append([choose_row,choose_col ])
+             returnable.append([choose_row,choose_col + 1 ])
         else:
-             returnable.append([choose_col + 1, choose_row])
-             returnable.append([choose_col, choose_row])
+             returnable.append([choose_row,choose_col + 1 ])
+             returnable.append([choose_row,choose_col])
      elif h_v == 1:
-         if(board[choose_col][choose_row + 1] != "[   ]" or board[choose_col][choose_row - 1] != "[   ]"):
+         if(board[choose_row + 1][choose_col] != "[   ]" or board[choose_row - 1][choose_col] != "[   ]"):
              create(board)
          if choose_row == len(board[0])-1:
-             returnable.append([choose_col, choose_row - 1])
-             returnable.append([choose_col, choose_row])
+             returnable.append([choose_row - 1,choose_col ])
+             returnable.append([choose_row,choose_col ])
          elif choose_row == 0:
-             returnable.append([choose_col, choose_row])
-             returnable.append([choose_col, choose_row + 1])
+             returnable.append([choose_row,choose_col ])
+             returnable.append([choose_row + 1,choose_col ])
          else:
-             returnable.append([choose_col, choose_row + 1])
-             returnable.append([choose_col, choose_row])
+             returnable.append([choose_row + 1,choose_col ])
+             returnable.append([choose_row,choose_col ])
      return returnable
 
 def expand0(board, choose_row, choose_col):
@@ -120,7 +142,7 @@ def draw_Y(board, ship1, ship2):
 
 #Used in main method for cpu's turn. Returns True if it hits anything. False if it misses.
 def cpu_turn(board):
-    coords = create(board)
+    coords = generate(board)
     if(board[coords[0]][coords[1]] == "[   ]"):
         draw_O(board, coords[0], coords[1])
         return False
@@ -261,25 +283,15 @@ def play():
             except:
                 print("Numbers only please")
                 continue
-            else:       
+            else:
                 car = row_list[len(row_list)-1], column_list[len(column_list)-1]
                 print("Missile Launch")
-                if (cpu_ship1[0][0] or cpu_ship1[0][1] or cpu_ship1[1][0] or cpu_ship1[1][1] == car):
+                if car == cpu_ship1[0] or cpu_ship1[1] :
                     print("CPU Board")
                     draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
                     print("HIT!")
                     x = 0
-                elif (cpu_ship2[0][0] or cpu_ship2[0][1] or cpu_ship2[1][0] or cpu_ship2[1][1] == car):
-                    print("CPU Board")
-                    draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
-                    print("HIT!")
-                    x = 0
-                elif (cpu_ship1[0][0] and cpu_ship1[0][1] and cpu_ship1[1][0] and cpu_ship1[1][1] == row_list, column_list):
-                    print("CPU Board")
-                    draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
-                    print("HIT!")
-                    x = 0
-                elif (cpu_ship2[0][0] and cpu_ship2[0][1] and cpu_ship2[1][0] and cpu_ship2[1][1] == row_list, column_list):
+                elif car == 7:
                     print("CPU Board")
                     draw_X(board, row_list[len(row_list) - 1], column_list[len(column_list) - 1])
                     print("HIT!")
